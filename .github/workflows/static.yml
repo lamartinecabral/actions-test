@@ -21,17 +21,7 @@ concurrency:
   cancel-in-progress: true
 
 jobs:
-  build:
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v3
-      - name: Build
-        run: npm run build && pwd && cat docs/index.html
-    
-  # Single deploy job since we're just deploying
-  deploy:
-    needs: build
+  build & deploy:
     environment:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
@@ -39,10 +29,10 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v3
+      - name: Build
+        run: npm run build && cat docs/index.html
       - name: Setup Pages
         uses: actions/configure-pages@v2
-      - name: Check if file exists
-        run: pwd && ls && ls docs && cat docs/index.html
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v1
         with:
