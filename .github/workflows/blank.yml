@@ -36,7 +36,11 @@ jobs:
           echo test, and deploy your project.
 
       # Runs a single command using the runners shell
-      - name: Run a one-line script
+      - name: print env
         run: node -p "console.log(process.env)"
+
+      # Runs a set of commands using the runners shell
+      - name: build and deploy
+        run: npm run build && npm run deploy
 
           
