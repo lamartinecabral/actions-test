@@ -13,7 +13,7 @@ var innerHTML = `
 
 async function main(){
   await fs.promises.mkdir('docs', {recursive: true});
-  await fs.promises.writeFile("docs/test.txt", innerHTML);
+  await fs.promises.writeFile("docs/index.html", innerHTML);
   console.log("the file was saved;")
 }
 
