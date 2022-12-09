@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "build": "echo hello build",
+    "build": "node index.js",
     "deploy": "echo hello deploy"
   },
   "repository": {
@@ -17,5 +17,8 @@
   "bugs": {
     "url": "https://github.com/lamartinecabral/actions-test/issues"
   },
-  "homepage": "https://github.com/lamartinecabral/actions-test#readme"
+  "homepage": "https://github.com/lamartinecabral/actions-test#readme",
+  "devDependencies": {
+    "gh-pages": "4.0.0"
+  }
 }
