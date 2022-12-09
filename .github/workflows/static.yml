@@ -27,7 +27,7 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v3
       - name: Build
-        run: npm run build && cat docs/index.html
+        run: npm run build && pwd && cat docs/index.html
     
   # Single deploy job since we're just deploying
   deploy:
@@ -42,7 +42,7 @@ jobs:
       - name: Setup Pages
         uses: actions/configure-pages@v2
       - name: Check if file exists
-        run: cat docs/index.html
+        run: pwd && ls && ls docs && cat docs/index.html
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v1
         with:
