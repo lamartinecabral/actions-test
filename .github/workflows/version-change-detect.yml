@@ -9,16 +9,27 @@ on:
 jobs:
   compare:
     runs-on: ubuntu-latest
+    outputs:
+      isequal: ${{ steps.test.outputs.result }}
     steps:
       - name: Checkout
         uses: actions/checkout@v4
         with:
           fetch-depth: 2
       - name: Current version
-        run: CUR=$(node -p "require('./package.json').version") && echo "CURRENT_VERSION=$CUR" >> "$GITHUB_ENV"
+        run: CUR=$(node -p "require('./package.json').version") && echo "CURRENT=$CUR" >> "$GITHUB_ENV"
       - name: Go to previous commit
         run: git checkout HEAD^
       - name: Previous version
-        run: PREV=$(node -p "require('./package.json').version") && echo "PREVIOUS_VERSION=$PREV" >> "$GITHUB_ENV"
+        run: PREV=$(node -p "require('./package.json').version") && echo "PREVIOUS=$PREV" >> "$GITHUB_ENV"
+      - id: test
+        run: TEST=$(node -p "'$CURRENT' === '$PREVIOUS'") && echo "result=$TEST" >> "$GITHUB_OUTPUT"
+
+  print:
+    needs: compare
+    env:
+      ISEQUAL: ${{needs.compare.outputs.isequal}}
+    runs-on: ubuntu-latest
+    steps:
       - name: Print
-        run: echo current $CURRENT_VERSION previous $PREVIOUS_VERSION
+        run: echo $ISEQUAL
