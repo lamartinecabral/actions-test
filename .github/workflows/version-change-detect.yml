@@ -6,6 +6,10 @@ on:
   push:
     branches: ["version"]
 
+env:
+  CURRENT_VERSION: "123"
+  PREVIOUS_VERSION: "234"
+
 jobs:
   compare:
     runs-on: ubuntu-latest
