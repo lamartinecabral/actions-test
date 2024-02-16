@@ -1,0 +1,24 @@
+# Simple workflow for deploying static content to GitHub Pages
+name: Do something if package version changes
+
+on:
+  # Runs on pushes targeting the default branch
+  push:
+    branches: ["version"]
+
+jobs:
+  compare:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 2
+      - name: Current version
+        run: CURRENT_VERSION=$(node -p "require('./package.json').version")
+      - name: Go to previous commit
+        run: git checkout HEAD^
+      - name: Previous version
+        run: PREVIOUS_VERSION=$(node -p "require('./package.json').version")
+      - name: Print
+        run: echo current $CURRENT_VERSION previous $PREVIOUS_VERSION
