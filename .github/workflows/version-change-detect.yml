@@ -19,10 +19,10 @@ jobs:
         with:
           fetch-depth: 2
       - name: Current version
-        run: CURRENT_VERSION=$(node -p "require('./package.json').version")
+        run: CUR=$(node -p "require('./package.json').version") && echo "CURRENT_VERSION=$CUR" >> "$GITHUB_ENV"
       - name: Go to previous commit
         run: git checkout HEAD^
       - name: Previous version
-        run: PREVIOUS_VERSION=$(node -p "require('./package.json').version")
+        run: PREV=$(node -p "require('./package.json').version") && echo "PREVIOUS_VERSION=$PREV" >> "$GITHUB_ENV"
       - name: Print
         run: echo current $CURRENT_VERSION previous $PREVIOUS_VERSION
