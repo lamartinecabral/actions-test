@@ -25,11 +25,18 @@ jobs:
       - id: test
         run: TEST=$(node -p "'$CURRENT' === '$PREVIOUS'") && echo "result=$TEST" >> "$GITHUB_OUTPUT"
 
-  print:
+  print-false:
     needs: compare
-    env:
-      ISEQUAL: ${{needs.compare.outputs.isequal}}
+    if: needs.compare.outputs.isequal == 'false'
     runs-on: ubuntu-latest
     steps:
       - name: Print
-        run: echo $ISEQUAL
+        run: echo false
+
+  print-true:
+    needs: compare
+    if: needs.compare.outputs.isequal == 'true'
+    runs-on: ubuntu-latest
+    steps:
+      - name: Print
+        run: echo true
