@@ -18,7 +18,7 @@
     "url": "https://github.com/lamartinecabral/actions-test/issues"
   },
   "homepage": "https://github.com/lamartinecabral/actions-test#readme",
-  "devDependencies": {
-    
+  "dependencies": {
+    "dayjs": "^1.11.10"
   }
 }

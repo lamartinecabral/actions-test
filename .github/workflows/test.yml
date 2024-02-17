@@ -1,0 +1,59 @@
+name: Publish to NPM
+
+on: workflow_dispatch
+
+jobs:
+  check_versions:
+    name: Check package version
+    runs-on: ubuntu-latest
+
+    outputs:
+      shouldPublishCore: ${{ steps.checkCore.outputs.isPublished == 'false' }}
+
+    steps:
+      - name: Checkout to repo
+        uses: actions/checkout@v4
+
+      - id: checkCore
+        run: |
+          echo "isPublished=$(node test.js)" >> "$GITHUB_OUTPUT"
+
+  build_and_publish:
+    needs: check_versions
+    if: needs.check_versions.outputs.shouldPublishCore
+
+    name: Build & Publish packages
+    runs-on: ubuntu-latest
+    env:
+      NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+
+    steps:
+      - name: Checkout to repo
+        uses: actions/checkout@v2
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v2
+        with:
+          node-version: 16
+          node-cache: yarn
+
+      - name: Cache node_modules
+        uses: actions/cache@v2
+        with:
+          path: |
+            node_modules
+            */*/node_modules
+          key: ${{ runner.os }}-${{ hashFiles('**/yarn.lock') }}
+
+      - name: Install dependencies
+        run: |
+          yarn install
+
+      - name: Build
+        run: |
+          yarn build
+
+      - name: Publish core
+        if: needs.check_versions.outputs.shouldPublishCore
+        run: |
+          cat docs/index.html
