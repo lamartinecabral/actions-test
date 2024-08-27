@@ -1,0 +1,17 @@
+name: My Action Workflow
+
+on:
+  push:
+    branches: ["my-action-main"]
+
+jobs:
+  my_action:
+    name: My Action Job
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: My Action Step
+        uses: lamartinecabral/my-action@main
+        with:
+          main-branch: "my-action-main"
+          dev-branch: "my-action-dev"
