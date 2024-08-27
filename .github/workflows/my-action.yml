@@ -1,8 +1,6 @@
 name: My Action Workflow
 
-on:
-  push:
-    branches: ["my-action-main"]
+on: workflow_dispatch
 
 jobs:
   my_action:
