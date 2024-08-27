@@ -12,6 +12,8 @@ jobs:
     steps:
       - name: My Action Step
         uses: lamartinecabral/my-action@main
+        env:
+          GITHUB_TOKEN: ${{ github.token }}
         with:
           main-branch: "my-action-main"
           dev-branch: "my-action-dev"
