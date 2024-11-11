@@ -1,0 +1,16 @@
+name: milestone trigger
+
+on:
+  milestone:
+
+jobs:
+  master_to_dev:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: milestone trigger
+      - run: |
+          echo "Event: ${{ github.event_name }}"
+          echo "Action: ${{ github.event.action }}"
+          echo "Milestone title: ${{ github.event.milestone.title }}"
+          echo "Milestone state: ${{ github.event.milestone.state }}"
