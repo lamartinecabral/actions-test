@@ -2,6 +2,7 @@ name: milestone trigger
 
 on:
   milestone:
+   types: [closed]
 
 jobs:
   milestone-trigger:
