@@ -9,7 +9,7 @@ jobs:
 
     steps:
       - name: milestone trigger
-      - run: |
+        run: |
           echo "Event: ${{ github.event_name }}"
           echo "Action: ${{ github.event.action }}"
           echo "Milestone title: ${{ github.event.milestone.title }}"
