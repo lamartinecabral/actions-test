@@ -4,7 +4,7 @@ on:
   milestone:
 
 jobs:
-  master_to_dev:
+  milestone-trigger:
     runs-on: ubuntu-latest
 
     steps:
