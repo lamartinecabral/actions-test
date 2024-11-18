@@ -1,6 +1,7 @@
 name: milestone trigger
 
 on:
+  workflow_dispatch:
   milestone:
    types: [closed]
 
