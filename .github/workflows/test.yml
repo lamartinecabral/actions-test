@@ -1,10 +1,9 @@
 name: Branch name filtering
 
 on:
-  pull_request
-
-env:
-  SKIP_BRANCHES: '["thisshouldnottrigger"]'
+  pull_request:
+    branches:
+      - thisshouldtrigger
 
 jobs:
   job1:
