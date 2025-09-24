@@ -3,7 +3,7 @@ name: Branch name filtering
 on:
   pull_request:
     branches:
-      - 'thisshouldtrigger'
+      - 'thisshouldtrigger*'
 
 jobs:
   job1:
