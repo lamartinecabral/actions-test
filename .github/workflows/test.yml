@@ -1,17 +1,38 @@
 name: Branch name filtering
 
 on:
-  pull_request:
-    branches:
-      - '*'
+  pull_request
+
+env:
+  SKIP_BRANCHES: '["thisshouldnottrigger"]'
 
 jobs:
   job1:
-    if: github.head.ref != 'thisshouldnottrigger'
     name: Job 1
     runs-on: ubuntu-latest
 
     steps:
       - name: Run command
         run: |
+          echo $SKIP_BRANCHES
           echo "${{ toJSON(github) }}"
+
+  job2:
+    if: 123 > 12
+    name: Job 2
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Run command
+        run: |
+          echo oi mundo
+
+  job3:
+    if: 123 < 12
+    name: Job 3
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Run command
+        run: |
+          echo oi mundo
