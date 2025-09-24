@@ -7,11 +7,10 @@ on:
 
 jobs:
   job1:
-    if: github.ref != 'thisshouldnottrigger'
     name: Job 1
     runs-on: ubuntu-latest
 
     steps:
       - name: Run command
         run: |
-          echo oi mundo
+          echo ${{ toJSON(github) }}
