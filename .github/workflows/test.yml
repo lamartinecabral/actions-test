@@ -2,8 +2,7 @@ name: Branch name filtering
 
 on:
   pull_request:
-    branches:
-      - '**/thisshouldtrigger'
+    branches: ['thisshouldtrigger']
 
 jobs:
   job1:
@@ -13,9 +12,7 @@ jobs:
     steps:
       - name: Run command
         run: |
-          echo $SKIP_BRANCHES
           echo "${{ toJSON(github) }}"
-          echo "${{ toJSON(env) }}"
 
   job2:
     if: github.head_ref == 'thisshouldnottrigger'
