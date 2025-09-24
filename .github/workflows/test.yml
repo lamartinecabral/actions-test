@@ -16,9 +16,10 @@ jobs:
         run: |
           echo $SKIP_BRANCHES
           echo "${{ toJSON(github) }}"
+          echo "${{ toJSON(env) }}"
 
   job2:
-    if: contains(fromJSON($SKIP_BRANCHES), github.head.ref) == true
+    # if: contains(fromJSON($SKIP_BRANCHES), github.head.ref) == true
     name: Job 2
     runs-on: ubuntu-latest
 
@@ -28,7 +29,7 @@ jobs:
           echo oi mundo
 
   job3:
-    if: contains(fromJSON($SKIP_BRANCHES), github.head.ref) == false
+    # if: contains(fromJSON($SKIP_BRANCHES), github.head.ref) == false
     name: Job 3
     runs-on: ubuntu-latest
 
