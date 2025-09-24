@@ -13,4 +13,4 @@ jobs:
     steps:
       - name: Run command
         run: |
-          echo ${{ toJSON(github) }}
+          echo "${{ toJSON(github) }}"
