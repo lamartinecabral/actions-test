@@ -6,7 +6,7 @@ on:
 
 jobs:
   job1:
-    name: Job 1
+    name: log github obj
     runs-on: ubuntu-latest
 
     steps:
@@ -15,8 +15,8 @@ jobs:
           echo "${{ toJSON(github) }}"
 
   job2:
-    if: github.head_ref == 'thisshouldnottrigger'
-    name: Job 2
+    if: github.head_ref == 'thisshouldtrigger'
+    name: head_branch thisshouldtrigger
     runs-on: ubuntu-latest
 
     steps:
@@ -25,8 +25,48 @@ jobs:
           echo oi mundo
 
   job3:
-    if: github.head_ref != 'thisshouldnottrigger' && github.event.pull_request.assignee == null
-    name: Job 3
+    if: github.head_ref == 'thisshouldnottrigger'
+    name: head_branch thisshouldnottrigger
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Run command
+        run: |
+          echo oi mundo
+
+  job4:
+    if: github.event.pull_request.assignee == null
+    name: without assignee
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Run command
+        run: |
+          echo oi mundo
+
+  job5:
+    if: github.event.pull_request.assignee != null
+    name: with assignee
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Run command
+        run: |
+          echo oi mundo
+
+  job6:
+    if: github.event.action == 'opened'
+    name: action opened
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Run command
+        run: |
+          echo oi mundo
+
+  job7:
+    if: github.event.action == 'synchronize'
+    name: action synchronize
     runs-on: ubuntu-latest
 
     steps:
