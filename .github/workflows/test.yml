@@ -25,7 +25,7 @@ jobs:
           echo oi mundo
 
   job3:
-    if: github.head_ref != 'thisshouldnottrigger' && github.pull_request.assignee == null
+    if: github.head_ref != 'thisshouldnottrigger' && github.event.pull_request.assignee == null
     name: Job 3
     runs-on: ubuntu-latest
 
